@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>放大镜</title>
+  <style type="text/css">
+    #small_pic {
+      width: 430px;
+      height: 430px;
+      position: relative;
+      margin: 100px ;
+      border: 1px solid #000;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+      background: #ccc;
+      opacity: 0.8;
+      position: absolute;
+      z-index: 2;
+      display: none;
+    }
+
+    #big_pic {
+      width: 430px;
+      height:430px;
+      border: 1px solid #000;
+      overflow: hidden;
+      position: absolute;
+      left: 630px;
+      top: 100px;
+      display: none;}
+    #big_pic img { position: absolute;}
+  </style>
+</head>
+<body>
+<div id="small_pic">
+  <img width="430" height="430" src="https://img.alicdn.com/bao/uploaded/i4/TB13Y8iFVXXXXXwapXXXXXXXXXX_!!0-item_pic.jpg" alt="刘亦菲图片"/>
+  <p></p>
+</div>
+
+  <div id="big_pic">
+    <img width="860" height="860" src="https://img.alicdn.com/bao/uploaded/i4/TB13Y8iFVXXXXXwapXXXXXXXXXX_!!0-item_pic.jpg" alt="刘亦菲图片"/>
+  </div>
+  <script type="text/javascript" src = 'magnifier.js'></script>
+</body>
+</html>
