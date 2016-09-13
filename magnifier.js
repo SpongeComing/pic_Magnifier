@@ -8,7 +8,7 @@ aImg[0].onmouseover = function (ev) {
 
   var ev = ev || event;
 
-  var disX = ev.clientX - aDiv[0].offsetLeft - 1;
+  var disX = ev.clientX - aDiv[0].offsetLeft - 1;//减去边框1px的距离
   var disY = ev.clientY - aDiv[0].offsetTop -1;
 
   magnifier (disX,disY);
