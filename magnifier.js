@@ -12,7 +12,12 @@
     oP.style.width = parseInt(getStyle(aImg[0],'width')) * scaleX +'px';
     oP.style.height = parseInt(getStyle(aImg[0],'height')) * scaleY +'px';
 
+<<<<<<< HEAD
   };
+=======
+  var disX = ev.clientX - aDiv[0].offsetLeft - 1;//减去边框1px的距离
+  var disY = ev.clientY - aDiv[0].offsetTop -1;
+>>>>>>> 081de4e48d9f957c80ee1bb928d7deb708eaae74
 
   aDiv[0].onmousemove = function (ev) {
 
