@@ -1,34 +1,53 @@
-var aImg = document.querySelectorAll('img');
-var aDiv = document.querySelectorAll('div');
-var oP = document.querySelector('p');
-var scale = parseInt(getStyle(aImg[0],'width'))/parseInt(getStyle(aImg[1],'width'))
+  var aImg = document.querySelectorAll('img');
+  var aDiv = document.querySelectorAll('div');
+  var oP = document.querySelector('p');
+  var scaleX = parseInt(getStyle(aImg[0],'width'))/parseInt(getStyle(aImg[1],'width'))
+  var scaleY = parseInt(getStyle(aImg[0],'height'))/parseInt(getStyle(aImg[1],'height'))
 
+  aImg[0].onmouseover  =function () {
 
-aImg[0].onmouseover = function (ev) {
+    oP.style.display = 'block';
+    aDiv[1].style.display = 'block';
 
-  var ev = ev || event;
+    oP.style.width = parseInt(getStyle(aImg[0],'width')) * scaleX +'px';
+    oP.style.height = parseInt(getStyle(aImg[0],'height')) * scaleY +'px';
 
-  var disX = ev.clientX - aDiv[0].offsetLeft - 1;
-  var disY = ev.clientY - aDiv[0].offsetTop -1;
+  };
 
-  magnifier (disX,disY);
+  aDiv[0].onmousemove = function (ev) {
 
-oP.onmousemove = function (ev) {
+    oP.style.display = 'block';
+    aDiv[1].style.display = 'block';
 
-  var ev = ev || event;
+    var ev = ev || event;
 
-  var l = ev.clientX - aDiv[0].offsetLeft -1;
-  var t = ev.clientY - aDiv[0].offsetTop -1;
+    var L = ev.clientX - aDiv[0].offsetLeft - oP.offsetWidth/2;
+    var T = ev.clientY - aDiv[0].offsetTop - oP.offsetHeight/2;
 
-  magnifier(l,t);
-}
+    if (L<0) {
+      L = 0;
+    }else if (L>aDiv[0].offsetWidth - oP.offsetWidth-2) {
+      L = aDiv[0].offsetWidth - oP.offsetWidth-2;
+    }
 
-};
+    if (T<0) {
+      T = 0;
+    }else if (T>aDiv[0].offsetHeight - oP.offsetHeight-2) {
+     T = aDiv[0].offsetHeight - oP.offsetHeight-2;
+   }
+   oP.style.left = L +'px';
+   oP.style.top = T +'px';
 
-aDiv[0].onmouseout = function  () {
+   aImg[1].style.left = -L/scaleX + 'px';
+   aImg[1].style.top = -T/scaleY + 'px';
+ };
+
+ aDiv[0].onmouseout = function () {
+
   oP.style.display = 'none';
   aDiv[1].style.display = 'none';
- };
+
+}
 
 function getStyle( obj,attr){
   if ( getComputedStyle ) {
@@ -38,52 +57,3 @@ function getStyle( obj,attr){
     return obj.currentStyle[ attr ];
   }
 }
-
-function magnifier (x,y) {
-
-  var dWidth = aDiv[0].clientWidth;
-  var dHeight = aDiv[0].clientHeight;//大图宽高
-
-  oP.style.width = dWidth * scale + 'px';
-  oP.style.height = dHeight * scale+'px';
-
-   var iWidth = parseInt(getStyle( oP,'width'));
-  var iHeight = parseInt(getStyle( oP,'height'));//放大镜宽高
-
-  if (x < iWidth/2){
-
-    oP.style.left = '0px';
-    aImg[1].style.left = '0px';
-
-  }else if (x > dWidth- iWidth/2){
-
-    oP.style.left = (dWidth - iWidth) + 'px';
-    aImg[1].style.left = -(dWidth - iWidth)/scale + 'px';
-
-  }else {
-
-    oP.style.left = (x - iWidth/2) + 'px';
-    aImg[1].style.left = -(x - iWidth/2)/scale + 'px';
-  }
-
-
-  if (y < iHeight/2) {
-
-    oP.style.top = '0px';
-    aImg[1].style.top = '0px';
-  }else if ( y > dHeight - iHeight/2 ){
-
-    oP.style.top = (dHeight - iHeight) + 'px';
-    aImg[1].style.top = -(dHeight - iHeight)/scale + 'px';
-
-  }else {
-
-    oP.style.top = (y - iHeight/2) + 'px';
-    aImg[1].style.top = -(y - iHeight/2)/scale + 'px';
-  }
-
-  oP.style.display = 'block';
-  aDiv[1].style.display = 'block';
-
-}
-
